@@ -49,7 +49,8 @@ static void print_vu_meter_ch(char *label, int value) {
 	int v = (int)(value/100.0 * size);
 	char ch[LINE_LENGTH + 1] = "";
 	
-	for(int n=0; n < size; n++) {
+	int n;
+	for(n=0; n < size; n++) {
 		ch[n] = (n < v) ? '=' : ' ';
 	}
 	printf("%s%s\n", label, ch);
@@ -99,7 +100,8 @@ int main(int argc,char* argv[]) {
 			int n = read(fifo, buffer, BUFFER_SIZE);
 			if(n > 0) {
 				int words = n/4;
-				for(int m=0; m < words; m++) {
+				int m;
+				for(m=0; m < words; m++) {
 					print_vu_meter(buffer[4 * m] + ((buffer[4 * m + 1]) << 8), 
 						buffer[4 * m + 2] + ((buffer[4 * m + 3]) << 8));
 				}
